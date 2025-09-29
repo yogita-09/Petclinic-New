@@ -79,6 +79,7 @@
         <!-- Docker image -->
         <docker.jib-maven-plugin.version>2.6.0</docker.jib-maven-plugin.version>
         <docker.image.prefix>springcommunity</docker.image.prefix>
+             <jacoco-maven-plugin>0.8.6</jacoco-maven-plugin>
 
     </properties>
 
@@ -461,9 +462,29 @@
             </plugin>
 
         </plugins>
+
+             <plugin>
+                      <groupId>org.jacoco</groupId>
+                      <artifactId>jacoco-maven-plugin</artifactId>
+                      <version>${jacoco-maven-plugin}</version>
+                      <executions>
+                               <execution>
+                                        <goals>
+                                                 <goal>prepare-agent</goal>
+                                        </goals>
+                               </execution>
+                               <execution>
+                                        <id>report</id>
+                                        <phase>prepare-package</phase>
+                                        <goals>
+                                                 <goal>report</goal>
+                                        </goals>
+                               </execution>
+                      </executions>
+             </plugin>
     </build>
 
-    <profiles>
+   <profiles>
         <profile>
             <id>H2</id>
             <activation>
